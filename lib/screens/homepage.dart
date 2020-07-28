@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String _informedCity;
+  TextEditingController _controllerCity = TextEditingController();
   var formatData = DateFormat('YYYY, dd MMMM', 'pt_BR');
   DateTime actualDate = DateTime.now();
   Color colHumidity, colVisibility, colWind, colPressure, colClouds;
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
         elevation: 0,
-        actions: <Widget>[
+        actions: [
           Switch(
               value: valueSwitch,
               onChanged: (value) {
@@ -81,6 +82,85 @@ class _HomePageState extends State<HomePage> {
                 });
               })
         ],
+      ),
+      body: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: Container(
+          width: width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    left: width * 0.1, right: width * 0.1, top: width * 0.04),
+                //TODO: Validation of the json to search city. In future builder
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              visibleCity = false;
+                            });
+                          },
+                          child: Icon(
+                            Icons.location_on,
+                            size: width * 0.08,
+                            color: valueSwitch == false
+                                ? Colors.grey[700]
+                                : Colors.orange[600],
+                          ),
+                        ),
+                        Visibility(
+                          visible: visibleCity,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                visibleCity = false;
+                              });
+                            },
+                            // TODO: Text will be compare with the JSON
+                            child: Text('Searching',
+                                style: TextStyle(
+                                    fontSize: width * 0.09,
+                                    fontWeight: FontWeight.bold,
+                                    color: colText)),
+                          ),
+                        ),
+                        Visibility(
+                          visible: !visibleCity,
+                          child: Expanded(
+                            child: TextField(
+                              autofocus: true,
+                              style: TextStyle(color: colText),
+                              controller: _controllerCity,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                              onSubmitted: (_) {
+                                setState(() {
+                                  if (_controllerCity.text == null ||
+                                      _controllerCity.text.isEmpty) {
+                                  } else {
+                                    _informedCity = _controllerCity.text;
+                                  }
+                                  visibleCity = true;
+                                });
+                              },
+                            ))),
+                      ],
+                    ),
+                    SizedBox(
+                      // TODO: Here will come the date box.
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
