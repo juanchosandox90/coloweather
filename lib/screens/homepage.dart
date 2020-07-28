@@ -1,3 +1,4 @@
+import 'package:coloweather/widgets/detailpage.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   setColors() {
     if (valueSwitch == false) {
-      colHumidity = Colors.blue[300];
+      colHumidity = Colors.blue[200];
       colVisibility = Colors.orange[300];
       colWind = Colors.grey[300];
       colPressure = Colors.green[300];
@@ -94,9 +95,9 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                  padding: EdgeInsets.only(
-                      left: width * 0.1, right: width * 0.1, top: width * 0.1),
-                  child: FutureBuilder(
+                padding: EdgeInsets.only(
+                    left: width * 0.1, right: width * 0.1, top: width * 0.1),
+                child: FutureBuilder(
                     future: findWeather(
                         util.appID,
                         _informedCity == null
@@ -342,7 +343,22 @@ class _HomePageState extends State<HomePage> {
                       }
                     }),
               ),
-              //TODO: Insert here the widget to show the details of the weather and the forecast of the week.
+              Container(
+                height: visibleDetails == false ? 0 : height * 0.5,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 30, right: 30, top: 10),
+                  child: DetailPage(
+                    city: _informedCity,
+                    colClouds: colClouds,
+                    colPressure: colPressure,
+                    colText: colText,
+                    colHumidity: colHumidity,
+                    colWind: colWind,
+                    colVisibility: colVisibility,
+                  ),
+                ),
+              ),
+              //TODO: Weekly Forecast will be here to change if the forecast button got pressed
             ],
           ),
         ),
