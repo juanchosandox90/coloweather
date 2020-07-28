@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    left: width * 0.1, right: width * 0.1, top: width * 0.04),
+                    left: width * 0.1, right: width * 0.1, top: width * 0.1),
                 //TODO: Validation of the json to search city. In future builder
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,7 +220,102 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: width * 0.03,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    visibleDetails = true;
+                                  });
+                                },
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 500),
+                                  padding: visibleDetails == true
+                                      ? EdgeInsets.all(0)
+                                      : EdgeInsets.only(
+                                          left: 25,
+                                          right: 25,
+                                          top: 10,
+                                          bottom: 10),
+                                  decoration: BoxDecoration(
+                                      border: visibleDetails == true
+                                          ? null
+                                          : Border.all(
+                                              color: Colors.orange[600],
+                                              width: 1.2),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: Center(
+                                    child: Text(
+                                      'Detalles',
+                                      style: TextStyle(
+                                          fontSize: visibleDetails == true
+                                              ? width * 0.05
+                                              : width * 0.05,
+                                          color: colText,
+                                          fontWeight: visibleDetails == true
+                                              ? FontWeight.bold
+                                              : FontWeight.normal),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    visibleDetails = false;
+                                  });
+                                },
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 500),
+                                  padding: visibleDetails == false
+                                      ? EdgeInsets.all(0)
+                                      : EdgeInsets.only(
+                                          left: 25,
+                                          right: 25,
+                                          top: 10,
+                                          bottom: 10),
+                                  decoration: BoxDecoration(
+                                      border: visibleDetails == false
+                                          ? null
+                                          : Border.all(
+                                              color: Colors.orange[600],
+                                              width: 1.2),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: Center(
+                                    child: Text(
+                                      'Previsión',
+                                      style: TextStyle(
+                                          fontSize: visibleDetails == false
+                                              ? width * 0.05
+                                              : width * 0.05,
+                                          color: colText,
+                                          fontWeight: visibleDetails == false
+                                              ? FontWeight.bold
+                                              : FontWeight.normal),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: width * 0.03,
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               )
