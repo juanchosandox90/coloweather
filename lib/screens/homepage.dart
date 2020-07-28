@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String _informedCity;
   TextEditingController _controllerCity = TextEditingController();
-  var formatData = DateFormat('YYYY, dd MMMM', 'pt_BR');
+  var formatData = DateFormat('EEEE, dd MMMM', 'es_ES');
   DateTime actualDate = DateTime.now();
   Color colHumidity, colVisibility, colWind, colPressure, colClouds;
   Color colText, colBackground, colTextList, colContainerItemList;
@@ -153,7 +153,15 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(
-                      // TODO: Here will come the date box.
+                      height: width * 0.009,
+                    ),
+                    Text ('          ${formatData.format(actualDate)}',
+                    style: TextStyle(
+                      fontSize: width * 0.04,
+                      color: Colors.orange[700]),
+                    ),
+                    SizedBox (
+                      // TODO: Animated Icon to check weather status
                     )
                   ],
                 ),
