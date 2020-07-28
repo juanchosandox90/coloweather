@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String _informedCity;
   TextEditingController _controllerCity = TextEditingController();
-  var formatData = DateFormat('EEEE, dd MMMM', 'es_ES');
+  var formatData = DateFormat('yyyy, dd MMMM', 'es_ES');//dd/MM/yyyy
   DateTime actualDate = DateTime.now();
   Color colHumidity, colVisibility, colWind, colPressure, colClouds;
   Color colText, colBackground, colTextList, colContainerItemList;
