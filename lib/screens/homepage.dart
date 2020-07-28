@@ -1,3 +1,4 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String _informedCity;
   TextEditingController _controllerCity = TextEditingController();
-  var formatData = DateFormat('yyyy, dd MMMM', 'es_ES');//dd/MM/yyyy
+  var formatData = DateFormat('yyyy, dd MMMM', 'es_ES'); //dd/MM/yyyy
   DateTime actualDate = DateTime.now();
   Color colHumidity, colVisibility, colWind, colPressure, colClouds;
   Color colText, colBackground, colTextList, colContainerItemList;
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-    //double height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -130,9 +131,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Visibility(
-                          visible: !visibleCity,
-                          child: Expanded(
-                            child: TextField(
+                            visible: !visibleCity,
+                            child: Expanded(
+                                child: TextField(
                               autofocus: true,
                               style: TextStyle(color: colText),
                               controller: _controllerCity,
@@ -155,13 +156,70 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: width * 0.009,
                     ),
-                    Text ('          ${formatData.format(actualDate)}',
-                    style: TextStyle(
-                      fontSize: width * 0.04,
-                      color: Colors.orange[700]),
+                    Text(
+                      '          ${formatData.format(actualDate)}',
+                      style: TextStyle(
+                          fontSize: width * 0.04, color: Colors.orange[700]),
                     ),
-                    SizedBox (
-                      // TODO: Animated Icon to check weather status
+                    SizedBox(
+                      height: width * 0.01,
+                    ),
+                    Container(
+                      height: height * 0.25,
+                      width: width,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                              top: 0,
+                              right: -20,
+                              child: Container(
+                                height: height * 0.22,
+                                width: width * 0.55,
+                                child: FlareActor(
+                                  'assets/weather3.flr',
+                                  fit: BoxFit.contain,
+                                  //TODO: will hanlde the animation from the JSON
+                                  //animation: '3',
+                                ),
+                              )),
+                          Positioned(
+                            top: 10,
+                            left: 0,
+                            child: Text(
+                              //TODO: Will get the temp from the JSON
+                              '20°',
+                              style: TextStyle(
+                                  fontSize: width * 0.29,
+                                  fontWeight: FontWeight.w600,
+                                  color: colText),
+                            ),
+                          ),
+                          Positioned(
+                            top: width * 0.33,
+                            left: 5,
+                            child: Row(
+                              children: [
+                                Text(
+                                  //TODO: Will get min the temp from the JSON
+                                  'Min: 10°',
+                                  style: TextStyle(
+                                      fontSize: width * 0.038,
+                                      fontWeight: FontWeight.w300,
+                                      color: colText),
+                                ),
+                                Text(
+                                  //TODO: Will get the max temp from the JSON
+                                  ' / Max: 20°',
+                                  style: TextStyle(
+                                      fontSize: width * 0.038,
+                                      fontWeight: FontWeight.w300,
+                                      color: colText),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
