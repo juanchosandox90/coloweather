@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Positioned(
-                                    top: width * 0.4,
+                                    top: width * 0.46,
                                     left: 5,
                                     child: Row(
                                       children: [
