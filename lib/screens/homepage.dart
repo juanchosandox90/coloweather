@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Positioned(
-                                    top: width * 0.33,
+                                    top: width * 0.4,
                                     left: 5,
                                     child: Row(
                                       children: [
@@ -226,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                                               color: colText),
                                         ),
                                         Text(
-                                          ' / Max: ${weatherJson['main']['temp_max']}°',
+                                          ' / Sensacion Termica: ${weatherJson['main']['feels_like']}°',
                                           style: TextStyle(
                                               fontSize: width * 0.038,
                                               fontWeight: FontWeight.w300,
