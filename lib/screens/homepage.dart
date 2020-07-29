@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:coloweather/api/weatherapi.dart';
 import 'package:coloweather/util/utils.dart' as util;
+import 'package:coloweather/widgets/weeklyforecast.dart';
 
 class HomePage extends StatefulWidget {
   final String latitude, longitude;
@@ -64,6 +65,9 @@ class _HomePageState extends State<HomePage> {
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
+    List listMapDataTemp = [];
+    List iconList = [];
 
     return Scaffold(
       backgroundColor: colBackground,
@@ -358,7 +362,19 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              //TODO: Weekly Forecast will be here to change if the forecast button got pressed
+              Container(
+                height: visibleDetails == true ? 0 : height * 0.5,
+                child: Padding(
+                    padding: EdgeInsets.only(left: 30, right: 30, top: 10),
+                    child: WeeklyForecast(
+                      city: _informedCity,
+                      colContainerItemList: colContainerItemList,
+                      colTextList: colTextList,
+                    )),
+              ),
+              SizedBox(
+                height: 30,
+              )
             ],
           ),
         ),
